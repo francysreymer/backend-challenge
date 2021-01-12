@@ -211,14 +211,12 @@
         phone: '',
         access_level: '',
         password: '',
-        external_id: '',
       },
       defaultItem: {
         name: '',
         phone: '',
         access_level: '',
         password: '',
-        external_id: '',
       },
     }),
 
@@ -268,6 +266,7 @@
         try {
           this.loading = true
             let users = await axios.get('/api/users');
+            console.log('initialize() users: ', users)
             this.tbody = []
             for (const element of users.data) {
                 this.tbody.push(element);
