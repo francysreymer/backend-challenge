@@ -15,7 +15,7 @@
               type="error"
               v-if="displayMsg && statusError"
             >
-              Ocorreu algum <strong>erro</strong> ao salvar o imóvel.
+              Ocorreu algum <strong>erro</strong> ao salvar o usuário.
             </v-alert>
             <v-data-table
                 :headers="headers"
@@ -63,7 +63,7 @@
                             >
                                 <v-text-field
                                 v-model="editedItem.name"
-                                :rules="[rules.required, rules.email]"
+                                :rules="[rules.required]"
                                 :error="error.name"
                                 label="Nome"
                                 ></v-text-field>
@@ -306,7 +306,7 @@
           return;
         }
 
-        let user = await axios.post('/api/properties/store', this.editedItem);
+        let user = await axios.post('/api/users/store', this.editedItem);
         console.log('save() user: ', user)
         if(user.status === 201) {
             this.textMsg = "O usuário foi registrado com sucesso."

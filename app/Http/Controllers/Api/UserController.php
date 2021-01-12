@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
-class PropertyController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
@@ -21,27 +21,23 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'owner_email' => 'required|email',
-            'address' => 'required',
-            'neighborhood' => 'required',
-            'city' => 'required',
-            'state' => 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'access_level' => 'required',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(["property_id" => null]);
+            return response()->json(["user_id" => null]);
         } else {
-            $property = User::create([
-                'owner_email' => $request->get('owner_email'),
-                'address' => $request->get('address'),
-                'number' => $request->get('number'),
-                'complement' => $request->get('complement'),
-                'neighborhood' => $request->get('neighborhood'),
-                'city' => $request->get('city'),
-                'state' => $request->get('state'),
+            $user = User::create([
+                'name' => $request->get('name'),
+                'phone' => $request->get('phone'),
+                'access_level' => $request->get('access_level'),
+                'password' => $request->get('password'),
                 'active' => true,
             ]);
-            return response()->json(["property_id" => $property->id], 201);
+            return response()->json(["user_id" => $user->id], 201);
         }
     }
 
