@@ -8,7 +8,8 @@
 
 ## 🧐 Sobre 
 
-Software online de cadastro de contratos e imóveis e leitura via API e via browser.
+Software online de cadastro de usuários e leitura via API e via browser.
+Software para cálculo contendo a subtração das somas das diagonais primárias e secundárias.
 O software e desenvolvido em Laravel + Vuejs.
 
 ## 🏁 Iniciando
@@ -35,6 +36,13 @@ Clone o git deste projeto em seu computador:
 
 ```
 git clone https://francysreymer@bitbucket.org/francysreymer/contratos-de-imoveis.git
+```
+
+Execute os seguintes comandos na raiz do seu projeto:
+
+```
+1 - composer install
+2 - npm install
 ```
 
 Crie uma base de dados no seu banco Mysql local e altere o arquivo .env na raiz do
@@ -72,6 +80,8 @@ php artisan serve
 
 - Para acessar o software web basta copiar e colar a url que aparecer na linha
 de comando, deve ser algo como: http://127.0.0.1:8000
+
+- Para acessar o algoritmo que resolve o desafio 1 da matriz quadrada acesse: http://127.0.0.1:8000/matriz-quadrada
 
 ## ⛏️ Tecnologias
 
