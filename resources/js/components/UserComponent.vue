@@ -259,9 +259,9 @@
       async initialize () {
         try {
           this.loading = true
-            let properties = await axios.get('/api/properties');
+            let users = await axios.get('/api/users');
             this.tbody = []
-            for (const element of properties.data) {
+            for (const element of users.data) {
                 this.tbody.push(element);
             }
             this.loading = false

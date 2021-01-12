@@ -20,9 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Api')->name('api.')->group(function() {
     Route::prefix('users')->group(function() {
-        Route::get('/', 'PropertyController@index')->name('index_properties');
+        Route::get('/', 'UserController@index')->name('index_users');
 
-        Route::post('/store', 'PropertyController@store')->name('store_properties');
+        Route::post('/store', 'UserController@store')->name('store_users');
 
     });
 });
