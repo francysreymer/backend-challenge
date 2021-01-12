@@ -22,6 +22,7 @@ import Vuetify from "./plugins/vuetify"
 
 Vue.component('property-component', require('./components/PropertyComponent.vue').default);
 Vue.component('contractor-component', require('./components/ContractorComponent.vue').default);
+Vue.component('user-component', require('./components/UserComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
