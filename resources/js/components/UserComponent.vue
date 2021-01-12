@@ -181,10 +181,6 @@
       items: ['free', 'premium'],
       rules: {
         required: value => !!value || 'Obrigatório.',
-        email: value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'E-mail inválido.'
-        },
       },
       headers: [
         { text: 'Nome', value: 'name' },
@@ -239,24 +235,16 @@
     methods: {
 
       async upgrade(item) {
-        console.log('upgrade item: ', item)
         item.access_level = "premium"
-
-        let user = await axios.put('/api/users/update-access-level', item);
-        console.log('upgrade() user: ', user)
-
+        await axios.put('/api/users/update-access-level', item);
         let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
         let mLearnUser = await axios.put('https://api2.mlearn.mobi/integrator/qualifica/users/'+item.mlearn_id+'/upgrade', {}, {headers});
         console.log('upgrade() mLearnUser: ', mLearnUser)
       },
 
       async downgrade(item) {
-        console.log('downgrade item: ', item)
         item.access_level = "free"
-
-        let user = await axios.put('/api/users/update-access-level', item);
-        console.log('downgrade() user: ', user)
-
+        await axios.put('/api/users/update-access-level', item);
         let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
         let mLearnUser = await axios.put('https://api2.mlearn.mobi/integrator/qualifica/users/'+item.mlearn_id+'/downgrade', {}, {headers});
         console.log('downgrade() mLearnUser: ', mLearnUser)
@@ -266,7 +254,6 @@
         try {
           this.loading = true
             let users = await axios.get('/api/users');
-            console.log('initialize() users: ', users)
             this.tbody = []
             for (const element of users.data) {
                 this.tbody.push(element);
@@ -314,7 +301,6 @@
         }
 
         let user = await axios.post('/api/users/store', this.editedItem);
-        console.log('save() user: ', user)
         if(user.status === 201) {
 
           let data = Object.assign({}, this.editedItem)
