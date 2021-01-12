@@ -240,35 +240,28 @@
 
     methods: {
 
-      validateEmail(email) {
-        console.log('email: ', email)
-        return /^[^@]+@\w+(\.\w+)+\w$/.test(email)
-      },
-
       async upgrade(item) {
         console.log('upgrade item: ', item)
+        item.access_level = "premium"
 
-        const index = this.tbody.findIndex(element => element.id == item.id )
-        this.tbody[index].access_level = "premium"
+        let user = await axios.put('/api/users/update-access-level', item);
+        console.log('upgrade() user: ', user)
 
-          let mLearnUser = await axios.post('https://api2.mlearn.mobi/integrator/qualifica/users', data, {headers});
-          console.log('save() mLearnUser: ', mLearnUser)
-
-
-
-
+        let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
+        let mLearnUser = await axios.put('https://api2.mlearn.mobi/integrator/qualifica/users/'+item.mlearn_id+'/upgrade', {}, {headers});
+        console.log('upgrade() mLearnUser: ', mLearnUser)
       },
 
       async downgrade(item) {
         console.log('downgrade item: ', item)
+        item.access_level = "free"
 
-        const index = this.tbody.findIndex(element => element.id == item.id )
-        this.tbody[index].access_level = "free"
+        let user = await axios.put('/api/users/update-access-level', item);
+        console.log('downgrade() user: ', user)
 
-          let mLearnUser = await axios.post('https://api2.mlearn.mobi/integrator/qualifica/users', data, {headers});
-          console.log('save() mLearnUser: ', mLearnUser)
-
-
+        let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
+        let mLearnUser = await axios.put('https://api2.mlearn.mobi/integrator/qualifica/users/'+item.mlearn_id+'/downgrade', {}, {headers});
+        console.log('downgrade() mLearnUser: ', mLearnUser)
       },
 
       async initialize () {
@@ -330,6 +323,9 @@
           let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
           let mLearnUser = await axios.post('https://api2.mlearn.mobi/integrator/qualifica/users', data, {headers});
           console.log('save() mLearnUser: ', mLearnUser)
+
+          let updateMlearnId = await axios.put('/api/users/update-mlearn-id', {id: user.data.user_id, mlearn_id: mLearnUser.data.data.id});
+          console.log('save() updateMlearnId: ', updateMlearnId)
 
           this.textMsg = "O usuário foi registrado com sucesso."
           this.displayMsg = true 

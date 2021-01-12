@@ -35,10 +35,23 @@ class UserController extends Controller
                 'phone' => $request->get('phone'),
                 'access_level' => $request->get('access_level'),
                 'password' => $request->get('password'),
+                'mlearn_id' => $request->get('mlearn_id'),
                 'active' => true,
             ]);
             return response()->json(["user_id" => $user->id], 201);
         }
+    }
+
+    public function updateAccessLevel(Request $request) {
+        $user = User::find($request->get('id'));
+        $user->access_level = $request->get('access_level');
+        $user->save();
+    }
+
+    public function updateMLearnId(Request $request) {
+        $user = User::find($request->get('id'));
+        $user->mlearn_id = $request->get('mlearn_id');
+        $user->save();
     }
 
 }
