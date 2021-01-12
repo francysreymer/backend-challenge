@@ -245,12 +245,30 @@
         return /^[^@]+@\w+(\.\w+)+\w$/.test(email)
       },
 
-      upgrade(item) {
+      async upgrade(item) {
         console.log('upgrade item: ', item)
+
+        const index = this.tbody.findIndex(element => element.id == item.id )
+        this.tbody[index].access_level = "premium"
+
+          let mLearnUser = await axios.post('https://api2.mlearn.mobi/integrator/qualifica/users', data, {headers});
+          console.log('save() mLearnUser: ', mLearnUser)
+
+
+
+
       },
 
-      downgrade(item) {
+      async downgrade(item) {
         console.log('downgrade item: ', item)
+
+        const index = this.tbody.findIndex(element => element.id == item.id )
+        this.tbody[index].access_level = "free"
+
+          let mLearnUser = await axios.post('https://api2.mlearn.mobi/integrator/qualifica/users', data, {headers});
+          console.log('save() mLearnUser: ', mLearnUser)
+
+
       },
 
       async initialize () {
@@ -306,15 +324,22 @@
         let user = await axios.post('/api/users/store', this.editedItem);
         console.log('save() user: ', user)
         if(user.status === 201) {
-            this.textMsg = "O usuário foi registrado com sucesso."
-            this.displayMsg = true 
-            this.statusSuccess = true
-            this.tbody.push({id: user.data.user_id, ...this.editedItem});
-            this.editedItem = Object.assign({}, this.defaultItem)
-            setTimeout(function(){ 
-              this.displayMsg = false 
-              this.statusSuccess = false
-            }.bind(this), 3000);
+
+          let data = Object.assign({}, this.editedItem)
+          data = {'msisdn': this.editedItem.phone, 'external_id': user.data.user_id, ...data}
+          let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
+          let mLearnUser = await axios.post('https://api2.mlearn.mobi/integrator/qualifica/users', data, {headers});
+          console.log('save() mLearnUser: ', mLearnUser)
+
+          this.textMsg = "O usuário foi registrado com sucesso."
+          this.displayMsg = true 
+          this.statusSuccess = true
+          this.tbody.push({id: user.data.user_id, ...this.editedItem});
+          this.editedItem = Object.assign({}, this.defaultItem)
+          setTimeout(function(){ 
+            this.displayMsg = false 
+            this.statusSuccess = false
+          }.bind(this), 3000);
         } else {
             this.displayMsg = true 
             this.statusError = true
