@@ -24,9 +24,6 @@ O que você precisa para instalar o software:
 Versão PHP igual ou maior que 7.0 
 ```
 ```
-Framework Laravel igual ou maior que 7.0 
-```
-```
 Banco de Dados Mysql igual ou maior que 5.7.28
 ```
 
@@ -41,8 +38,8 @@ git clone https://francysreymer@bitbucket.org/francysreymer/contratos-de-imoveis
 Execute os seguintes comandos na raiz do seu projeto:
 
 ```
-1 - composer install
-2 - npm install
+1) composer install
+2) npm install
 ```
 
 Crie uma base de dados no seu banco Mysql local e altere o arquivo .env na raiz do
