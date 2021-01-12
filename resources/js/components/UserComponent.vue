@@ -85,12 +85,14 @@
                                 sm="12"
                                 md="12"
                             >
-                                <v-text-field
-                                v-model="editedItem.access_level"
-                                :rules="[rules.required]"
-                                :error="error.access_level"
-                                label="Nível de Acesso"
-                                ></v-text-field>
+                                <v-select
+                                  v-model="editedItem.access_level"
+                                  :rules="[rules.required]"
+                                  :error="error.access_level"
+                                  :items="items"
+                                  label="Nível de Acesso"
+                                  outlined
+                                ></v-select>
                             </v-col>
                             <v-col
                                 cols="12"
@@ -140,24 +142,18 @@
                         color="error"
                         small
                         @click="upgrade(props.item)"
+                        v-if="props.item.access_level === 'free'"
                       >
                         Upgrade
                       </v-btn>
                       <v-btn
                         depressed
-                        color="error"
+                        color="primary"
                         small
                         @click="downgrade(props.item)"
+                        v-else
                       >
                         Downgrade
-                      </v-btn>
-                      <v-btn
-                        depressed
-                        color="error"
-                        small
-                        @click="deleteItem(props.item)"
-                      >
-                        Excluir
                       </v-btn>
                     </td>                   
                   </tr>
@@ -182,6 +178,7 @@
       statusError: false,
       displayMsg: false,
       textMsg: '',
+      items: ['free', 'premium'],
       rules: {
         required: value => !!value || 'Obrigatório.',
         email: value => {
