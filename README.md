@@ -42,12 +42,6 @@ Execute os seguintes comandos na raiz do seu projeto:
 2) npm install
 ```
 
-Agora, execute este comando na raiz do seu projeto:
-
-```
-php artisan key:generate 
-```
-
 Crie uma base de dados no seu banco Mysql local e copie o arquivo .env.example para .env na raiz do projeto laravel com as informações de acesso ao banco.
 ```
 DB_CONNECTION=mysql
@@ -69,6 +63,12 @@ php artisan cache:clear
 Agora, execute o comando na raiz do projeto para criar o banco de dados:
 ```
 php artisan migrate
+```
+
+Agora, execute este comando na raiz do seu projeto:
+
+```
+php artisan key:generate 
 ```
 
 Digite o comando na raiz do projeto para executar o servidor:
