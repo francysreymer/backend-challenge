@@ -235,6 +235,7 @@
     methods: {
 
       async upgrade(item) {
+        console.log('upgrade() item: ', item)
         item.access_level = "premium"
         await axios.put('/api/users/update-access-level', item);
         let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
@@ -243,6 +244,7 @@
       },
 
       async downgrade(item) {
+        console.log('downgrade() item: ', item)
         item.access_level = "free"
         await axios.put('/api/users/update-access-level', item);
         let headers = {'Authorization': `Bearer aSE1gIFBKbBqlQmZOOTxrpgPKgQkgshbLnt1NS3w`, "service-id": "qualifica", "app-users-group-id": 20 }
