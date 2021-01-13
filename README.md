@@ -42,8 +42,13 @@ Execute os seguintes comandos na raiz do seu projeto:
 2) npm install
 ```
 
-Crie uma base de dados no seu banco Mysql local e altere o arquivo .env na raiz do
-projeto laravel com as informações de acesso ao banco.
+Agora, execute este comando na raiz do seu projeto:
+
+```
+php artisan key:generate 
+```
+
+Crie uma base de dados no seu banco Mysql local e copie o arquivo .env.example para .env na raiz do projeto laravel com as informações de acesso ao banco.
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
