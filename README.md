@@ -32,7 +32,7 @@ Banco de Dados Mysql igual ou maior que 5.7.28
 Clone o git deste projeto em seu computador:
 
 ```
-git clone https://francysreymer@bitbucket.org/francysreymer/contratos-de-imoveis.git
+git clone --branch francys-reymer https://github.com/francysreymer/backend-challenge.git
 ```
 
 Execute os seguintes comandos na raiz do seu projeto:
