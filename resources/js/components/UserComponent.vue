@@ -315,7 +315,7 @@
           this.textMsg = "O usuário foi registrado com sucesso."
           this.displayMsg = true 
           this.statusSuccess = true
-          this.tbody.push({id: user.data.user_id, ...this.editedItem});
+          this.tbody.push({id: user.data.user_id, mlearn_id: mLearnUser.data.data.id, ...this.editedItem});
           this.editedItem = Object.assign({}, this.defaultItem)
           setTimeout(function(){ 
             this.displayMsg = false 
